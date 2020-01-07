@@ -2,7 +2,7 @@
 
 ### Demo
 
-![App demo](https://media.giphy.com/media/VfEO6d4N8MROgBmOTs/giphy.gif)
+![App demo](https://media.giphy.com/media/YNEGiKWWNkeF3gqYQy/giphy.gif)
 
 ## To run project
 
