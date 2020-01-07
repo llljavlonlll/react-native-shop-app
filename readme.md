@@ -1,5 +1,11 @@
 # Ecommerce app built with React Native (Expo) and Redux (Thunk)
 
+### Demo
+
+![App demo](https://media.giphy.com/media/VfEO6d4N8MROgBmOTs/giphy.gif)
+
+## To run project
+
 Install dependencies
 
 ```
