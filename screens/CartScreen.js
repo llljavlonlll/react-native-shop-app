@@ -1,5 +1,5 @@
-import React from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 
@@ -16,15 +16,31 @@ const CartScreen = () => {
     const goods = useSelector(state => state.cart.goodsInTheCart);
     const price = useSelector(state => state.cart.price);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const dispatch = useDispatch();
 
-    const uniqueGoods = goods.filter(
-        (good, index) => goods.indexOf(good) === index
-    );
+    const uniqueGoods = goods
+        .map(good => good.id)
+        .map((id, index, self) => self.indexOf(id) === index && index)
+        .filter(index => goods[index])
+        .map(index => goods[index]);
 
     let items;
 
-    if (goods.length === 0) {
+    if (isLoading) {
+        items = (
+            <View
+                style={{
+                    flex: 1,
+                    alignItems: "center",
+                    justifyContent: "center"
+                }}
+            >
+                <ActivityIndicator size="large" color={Colors.accent} />
+            </View>
+        );
+    } else if (goods.length === 0) {
         items = (
             <View
                 style={{
@@ -52,6 +68,20 @@ const CartScreen = () => {
         );
     }
 
+    const sendOrder = async () => {
+        setIsLoading(true);
+        await dispatch(
+            addNewOrder({
+                date: moment().format("MMM DD YY, h:mm a"),
+                status: "Processing",
+                goods: goods,
+                price: price
+            })
+        );
+        dispatch(resetCart());
+        setIsLoading(false);
+    };
+
     return (
         <View style={styles.screen}>
             {items}
@@ -76,21 +106,7 @@ const CartScreen = () => {
                         <SansText>${price.total}</SansText>
                     </View>
                 </View>
-                <HeroButton
-                    style={styles.button}
-                    onPress={() => {
-                        dispatch(
-                            addNewOrder({
-                                id: Math.ceil(Math.random() * 1000000),
-                                date: moment().format("MMM DD YY, h:mm a"),
-                                status: "Processing",
-                                goods: goods,
-                                price: price
-                            })
-                        );
-                        dispatch(resetCart());
-                    }}
-                >
+                <HeroButton style={styles.button} onPress={sendOrder}>
                     Checkout
                 </HeroButton>
             </View>

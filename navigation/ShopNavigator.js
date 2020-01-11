@@ -1,4 +1,4 @@
-import { createAppContainer } from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createDrawerNavigator } from "react-navigation-drawer";
 
@@ -8,6 +8,7 @@ import GoodDetailsScreen from "../screens/GoodDetailsScreen";
 import OrdersScreen from "../screens/OrdersScreen";
 import YourGoodsScreen from "../screens/YourGoodsScreen";
 import AddEditGoodsScreen from "../screens/AddEditGoodScreen";
+import AuthScreen from "../screens/AuthScreen";
 
 const defaultStackConfig = {
     headerTitleStyle: {
@@ -38,7 +39,7 @@ const ManageProductsNavigator = createStackNavigator(
     defaultStackConfig
 );
 
-const MainNavigator = createDrawerNavigator(
+const MainShopNavigator = createDrawerNavigator(
     {
         Shop: ShopNavigator,
         Orders: OrdersNavigator,
@@ -46,5 +47,10 @@ const MainNavigator = createDrawerNavigator(
     },
     {}
 );
+
+const MainNavigator = createSwitchNavigator({
+    Auth: AuthScreen,
+    Shop: MainShopNavigator
+});
 
 export default createAppContainer(MainNavigator);

@@ -1,10 +1,10 @@
 export default {
-    primary: "#FAFBFC",
-    accent: "#559EFF",
-    starPositive: "#FBBA00",
-    starNegative: "#C9D5D1",
-    title: "#474747",
-    subtitle: "#999",
-    delete: "#FF4E6A",
+    primary: "#ecf0f1",
+    accent: "#3498db",
+    starPositive: "#f39c12",
+    starNegative: "#bdc3c7",
+    title: "#34495e",
+    subtitle: "#95a5a6",
+    delete: "#e74c3c",
     borderColor: "#e9e9e9"
 };

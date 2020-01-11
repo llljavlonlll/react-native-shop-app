@@ -1,4 +1,4 @@
-import { ADD_NEW_ORDER } from "../actions/orders";
+import { ADD_NEW_ORDER, LOAD_ORDERS } from "../actions/orders";
 
 const initialState = {
     orders: []
@@ -6,11 +6,14 @@ const initialState = {
 
 const ordersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_NEW_ORDER:
-            const updatedOrder = [...state.orders, action.order];
+        case LOAD_ORDERS:
             return {
-                ...state,
-                orders: updatedOrder
+                orders: action.orders
+            };
+        case ADD_NEW_ORDER:
+            const updatedOrders = [...state.orders, action.order];
+            return {
+                orders: updatedOrders
             };
         default:
             return state;

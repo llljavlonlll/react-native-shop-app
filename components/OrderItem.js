@@ -7,8 +7,6 @@ import SansText from "../components/SansText";
 import SansBoldText from "../components/SansBoldText";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import { GOODS } from "../data/dummy-data";
-
 const OrderItem = props => {
     const [animation] = useState(new Animated.Value(120));
     const [expanded, setExpanded] = useState(false);

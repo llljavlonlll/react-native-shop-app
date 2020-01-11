@@ -1,31 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     View,
     Text,
     StyleSheet,
     TouchableOpacity,
     FlatList,
-    ScrollView
+    ScrollView,
+    ActivityIndicator
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
+import { loadOrders } from "../store/actions/orders";
 import OrderItem from "../components/OrderItem";
 import Colors from "../constants/Colors";
 
 const OrdersScreen = () => {
+    const [isLoading, setIsLoading] = useState(false);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        setIsLoading(true);
+        dispatch(loadOrders()).then(res => setIsLoading(false));
+    }, [dispatch]);
+
     // Get piece of the global state
     const orders = useSelector(state => state.orders.orders);
 
+    if (isLoading) {
+        return (
+            <View style={styles.centered}>
+                <ActivityIndicator size="large" color={Colors.accent} />
+            </View>
+        );
+    }
+
     if (orders.length === 0) {
         return (
-            <View
-                style={{
-                    flex: 1,
-                    alignItems: "center",
-                    justifyContent: "center"
-                }}
-            >
+            <View style={styles.centered}>
                 <Text style={{ color: Colors.subtitle }}>
                     You don't have any orders yet
                 </Text>
@@ -70,6 +83,11 @@ const styles = StyleSheet.create({
         flex: 1,
 
         backgroundColor: Colors.primary
+    },
+    centered: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center"
     }
 });
 

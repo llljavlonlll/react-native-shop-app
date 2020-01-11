@@ -1,4 +1,3 @@
-import { GOODS } from "../../data/dummy-data";
 import {
     ADD_TO_CART,
     REMOVE_SINGLE,
@@ -36,8 +35,7 @@ const cartReducer = (state = initialState, action) => {
                 updatedCart
             );
             return {
-                ...state,
-                goodsInTheCart: [...state.goodsInTheCart, good],
+                goodsInTheCart: updatedCart,
                 price: {
                     subtotal,
                     tax,
@@ -61,7 +59,6 @@ const cartReducer = (state = initialState, action) => {
                 updatedCart
             );
             return {
-                ...state,
                 goodsInTheCart: updatedCart,
                 price: {
                     subtotal,
@@ -79,7 +76,6 @@ const cartReducer = (state = initialState, action) => {
                 updatedCart
             );
             return {
-                ...state,
                 goodsInTheCart: updatedCart,
                 price: {
                     subtotal,

@@ -1,11 +1,5 @@
 import React from "react";
-import {
-    View,
-    Text,
-    Dimensions,
-    StyleSheet,
-    TouchableOpacity
-} from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
 
 import { addToCart } from "../store/actions/cart";
@@ -33,7 +27,7 @@ const Footer = props => {
                 </View>
             </View>
             <HeroButton onPress={() => dispatch(addToCart(props.id))}>
-                ADD TO CART
+                ADD TO BAG
             </HeroButton>
         </View>
     );

@@ -3,13 +3,6 @@ export const REMOVE_SINGLE = "REMOVE_SINGLE";
 export const REMOVE_ALL = "REMOVE_ALL";
 export const RESET_CART = "RESET_CART";
 
-// export const addToCart = id => {
-//     return {
-//         type: ADD_TO_CART,
-//         goodId: id
-//     };
-// };
-
 export const addToCart = id => {
     return (dispatch, getState) => {
         const { goods } = getState();
